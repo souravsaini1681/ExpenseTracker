@@ -3,6 +3,8 @@ function deleteItem(index){
     const modalElement = document.getElementById("deleteModal");
     const modal = new bootstrap.Modal(modalElement);
     modal.show();
+
+    // fix this later.
     const deleteData = document.getElementById("deletedata");
     deleteData.addEventListener("click", function () {
       const tableData = localStorage.getItem("budgetData");
