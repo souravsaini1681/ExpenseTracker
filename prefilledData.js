@@ -1,18 +1,22 @@
-import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist } from "./validate.js";
-import {showTableData,showExpenseData} from "./showTable.js";
-import calculateExpenses from "./calculateExpense.js";                                            
+import {
+  isValidTitle,
+  validCategory,
+  validMonth,
+  validateTotalAmount,
+  isBudgetExist,
+} from "./validate.js";
+import { showTableData, showExpenseData } from "./showTable.js";
+import calculateExpenses from "./calculateExpense.js";
 
 // function for prefilled form data
 function prefilledData(mode) {
+  const parentElement = document.getElementById("tableContent");
 
-  const parentElement = document.getElementById('tableContent');
-  
-  parentElement.addEventListener('click', (event) => {
-    
-    const editButton = event.target.closest('.edit');  
-    if (!editButton) return; 
+  parentElement.addEventListener("click", (event) => {
+    const editButton = event.target.closest(".edit");
+    if (!editButton) return;
 
-    const index = editButton.getAttribute('data-index');
+    const index = editButton.getAttribute("data-index");
     const tableData = localStorage.getItem("budgetData");
     const data = JSON.parse(tableData);
     const budgetData = data[index];
@@ -24,10 +28,10 @@ function prefilledData(mode) {
 
     // Show modal for editing
     const modalElement = document.getElementById("addItemModal");
-    
+
     const modal = new bootstrap.Modal(modalElement);
     modal.show();
-      
+
     // Handle saving the form changes
     const saveFormChanges = document.getElementById("saveFormChanges");
     saveFormChanges.addEventListener("click", function (event) {
@@ -40,38 +44,42 @@ function prefilledData(mode) {
         totalAmount: document.getElementById("totalAmount").value,
       };
 
-      if (!validCategory() || !validMonth() || !validateTotalAmount() || !isBudgetExist()) {  
+      if (
+        !validCategory() ||
+        !validMonth() ||
+        !validateTotalAmount() ||
+        !isBudgetExist()
+      ) {
         return;
       } else {
         // Update the localStorage
         data[index] = updatedData;
         localStorage.setItem("budgetData", JSON.stringify(data));
         modal.hide();
-        showTableData(data); 
+        showTableData(data);
       }
     });
   });
 }
 
 function prefilledDataExpense(mode) {
+  const parentElement = document.getElementById("tableExpenseContent");
 
-  const parentElement = document.getElementById('tableExpenseContent');
-  
-  parentElement.addEventListener('click', (event) => {
-    
-    const editButton = event.target.closest('.editExpense');  
-    if (!editButton) return; 
+  parentElement.addEventListener("click", (event) => {
+    const editButton = event.target.closest(".editExpense");
+    if (!editButton) return;
 
-    const index = editButton.getAttribute('data-index');
+    const index = editButton.getAttribute("data-index");
     const tableData = localStorage.getItem("ExpenseData");
     const data = JSON.parse(tableData);
     const ExpnseData = data[index];
 
     // Prefill form fields with existing data
-    document.getElementById("expenseCategory").value = ExpnseData.ExpenseCategory;
+    document.getElementById("expenseCategory").value =
+      ExpnseData.ExpenseCategory;
     document.getElementById("ExpTitle").value = ExpnseData.ExpenseTitle;
     document.getElementById("Expmonth").value = ExpnseData.Expensemonth;
-    document.getElementById("Expamount").value= ExpnseData.ExpenseAmount;
+    document.getElementById("Expamount").value = ExpnseData.ExpenseAmount;
 
     // Show modal for editing
     const modalElement = document.getElementById("addExpenseItemModal");
@@ -92,12 +100,20 @@ function prefilledDataExpense(mode) {
       };
       let budgets = localStorage.getItem("budgetData");
       budgets = JSON.parse(budgets);
-      
-      let budget = budgets.find(val => val.category === expenseCategory.value && val.month === Expmonth.value);
-      
-      if (!budget || (budget.totalAmount - calculateExpenses(expenseCategory.value, Expmonth.value) < Expamount.value)) {
+
+      let budget = budgets.find(
+        (val) =>
+          val.category === expenseCategory.value && val.month === Expmonth.value
+      );
+
+      if (
+        !budget ||
+        budget.totalAmount -
+          calculateExpenses(expenseCategory.value, Expmonth.value) <
+          Expamount.value
+      ) {
         alert("The selected category and month do not have sufficient budget");
-        return; 
+        return;
       }
 
       if (!isValidTitle()) {
@@ -106,18 +122,16 @@ function prefilledDataExpense(mode) {
         // Update the localStorage
         data[index] = updatedData;
         localStorage.setItem("ExpenseData", JSON.stringify(data));
-        modal.hide(); 
-        showExpenseData(data); 
+        modal.hide();
+        showExpenseData(data);
 
-      //update budget table data
-       let budgetData = localStorage.getItem("budgetData");
-       budgetData = JSON.parse(budgetData);
-       showTableData(budgetData);
-       
+        //update budget table data
+        let budgetData = localStorage.getItem("budgetData");
+        budgetData = JSON.parse(budgetData);
+        showTableData(budgetData);
       }
     });
   });
 }
 
-
-export {prefilledData,prefilledDataExpense};
+export { prefilledData, prefilledDataExpense };
