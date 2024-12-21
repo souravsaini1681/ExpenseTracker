@@ -3,12 +3,22 @@ function deleteItem(index){
     const modalElement = document.getElementById("deleteModal");
     const modal = new bootstrap.Modal(modalElement);
     modal.show();
-
-    // fix this later.
+    
     const deleteData = document.getElementById("deletedata");
     deleteData.addEventListener("click", function () {
+      debugger
+      // check the expense in exist for these budget 
       const tableData = localStorage.getItem("budgetData");
-      const data = JSON.parse(tableData);
+      const data = JSON.parse(tableData); 
+      const dataElement = data[index];
+      let expenseData = localStorage.getItem("ExpenseData")
+      expenseData = JSON.parse(expenseData);
+
+       if(expenseData.some((val)=> val.ExpenseCategory === dataElement.category && val.Expensemonth === dataElement.month)){
+        debugger
+        alert("this budegt expense already exist");
+        return;
+       }
       data.splice(index, 1);
       localStorage.setItem("budgetData", JSON.stringify(data));
       modal.hide();
@@ -35,4 +45,4 @@ function deleteItemExpense(index){
 }
 )}
 
-export {deleteItem,deleteItemExpense}
+export {deleteItem,deleteItemExpense} 

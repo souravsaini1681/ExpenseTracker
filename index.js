@@ -4,7 +4,7 @@ import {showTableData,showExpenseData} from "./showTable.js";
 import {prefilledData,prefilledDataExpense} from "./prefilledData.js";
 import {deleteItem,deleteItemExpense} from "./deleteItem.js";
 import searchData from "./searchItem.js";
-import {isValidTitle,validCategory,validMonth,validateTotalAmount } from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory } from "./validate.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const totalAmount = document.getElementById("totalAmount");
     totalAmount.addEventListener("blur",validateTotalAmount);
+
+    const checkBudget = document.getElementById("month");
+    checkBudget.addEventListener("blur",isBudgetExist);
+
+    const expenseCategory = document.getElementById("expenseCategory");
+    expenseCategory.addEventListener("blur",validExpCategory);
 
 
   //on submit storage data tp localStorage
@@ -41,8 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   showExpenseData(storageExpenseData);
 
   //edit the items
-  const edit = document.getElementsByClassName("edit");
-  prefilledData(edit);
+    prefilledData();
 
   //delete the items
   document.getElementById('tableContent').addEventListener('click', function (event) {

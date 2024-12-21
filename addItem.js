@@ -1,22 +1,19 @@
-import {isValidTitle,validCategory,validMonth,validateTotalAmount } from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory } from "./validate.js";
 import {showTableData,showExpenseData} from "./showTable.js";
 import calculateExpenses from "./calculateExpense.js";
 
 function addItem(event) {
+
   event.preventDefault();
 
   const { month, totalAmount } = registrationForm.elements;
   const category = document.getElementById("category");
   let id =0;
-  if (!validCategory() && !validMonth() && !validateTotalAmount()) {
-    debugger
+  if (!validCategory() || !validMonth() || !validateTotalAmount() || !isBudgetExist()) {
     return;
   } else {
-    debugger
     // get and set data to localstorage  
     let storageData = localStorage.getItem("budgetData");
-    console.log(storageData);
-
     if (!storageData) {
       storageData = [];
       id=1;
@@ -29,7 +26,6 @@ function addItem(event) {
       }
       else{
         storageData = JSON.parse(storageData);
-        console.log(storageData);
         const totalPerson = storageData.length; 
         id = storageData[totalPerson - 1].id;
         id = id + 1;
@@ -40,12 +36,12 @@ function addItem(event) {
       id:id,
       category: category.value,
       month: month.value,
-      totalAmount: totalAmount.value,
+      totalAmount: parseInt(totalAmount.value),
     };
 
     storageData.push(data);
     localStorage.setItem("budgetData", JSON.stringify(storageData));
-    registrationForm.reset(); 
+    registrationForm.reset(); 	  
     const modal = document.getElementById("addItemModal");
     if (modal) {
         modal.style.display = "none";

@@ -1,6 +1,6 @@
-import {isValid,isValidTitle} from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist } from "./validate.js";
 import {showTableData,showExpenseData} from "./showTable.js";
-
+import calculateExpenses from "./calculateExpense.js";                                            
 
 // function for prefilled form data
 function prefilledData(mode) {
@@ -24,9 +24,10 @@ function prefilledData(mode) {
 
     // Show modal for editing
     const modalElement = document.getElementById("addItemModal");
+    
     const modal = new bootstrap.Modal(modalElement);
     modal.show();
-
+      
     // Handle saving the form changes
     const saveFormChanges = document.getElementById("saveFormChanges");
     saveFormChanges.addEventListener("click", function (event) {
@@ -39,7 +40,7 @@ function prefilledData(mode) {
         totalAmount: document.getElementById("totalAmount").value,
       };
 
-      if (!isValid(updatedData.id, updatedData.totalAmount, updatedData.category, updatedData.month)) {
+      if (!validCategory() || !validMonth() || !validateTotalAmount() || !isBudgetExist()) {  
         return;
       } else {
         // Update the localStorage

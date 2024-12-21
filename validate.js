@@ -1,51 +1,24 @@
 
-function isBudgetExist(id,category, month) {
+function isBudgetExist() {
+    const errorBudget = document.getElementById("errorBudget");
+    const category = document.getElementById("category");
+    const month = document.getElementById("month");
+
     let storageData = localStorage.getItem("budgetData");
-    if (!storageData) return false; 
+
+    if (!storageData) {
+        errorBudget.innerHTML = "";
+        return true;
+    }
 
     storageData = JSON.parse(storageData);
-    if(id===0){
-        return storageData.some(val => val.category === category && val.month === month);
-    }else{
-        return storageData.some(val =>val.id !== id && val.category === category && val.month === month);
-    }
-}
-
-function isValid(id,totalAmount, category, month) {
-    // Validate total Amount                                                                                               
-    const errorTotalAmount = document.getElementById("errortotalAmount");
-
-    const totalAmountInt = parseInt(totalAmount);
-    if (totalAmountInt >= 1000 && totalAmountInt <= 50000) {
-        errorTotalAmount.innerHTML = "";
+    if (!storageData.some(val => val.category === category.value && val.month === month.value)) {
+        errorBudget.innerHTML = ""; 
+        return true;
     } else {
-        errorTotalAmount.innerHTML = "Total amount must be greater than 1000 and less than 50000.";
+        errorBudget.innerHTML = "These budget and month already exist";
         return false;
     }
-
-    // validate budget
-    if (isBudgetExist(id,category, month)) {
-        alert("Category for the same month and year already exists.");
-        return false;
-    }
-
-    return true;
-}
-
-function isValidTitle(){
-    // Validate title                                                                                               
-    const errorTitle = document.getElementById("errorTitle");
-    const ExpTitle = document.getElementById("ExpTitle");
-
-    const titleLength = ExpTitle.value.length;
-
-    if (titleLength >= 10 && titleLength<= 50) {
-        errorTitle.innerHTML = "";
-    } else {
-        errorTitle.innerHTML = "title must be greater than 10 and less than 50";
-        return false;
-    }
-    return true;
 }
 
 
@@ -89,7 +62,6 @@ function isValidTitle(){
 
 //validate budget totalAmount
   function validateTotalAmount(){
-    debugger
     const errorTotalAmount = document.getElementById("errortotalAmount");
     const totalAm = document.getElementById("totalAmount");
 
@@ -98,13 +70,48 @@ function isValidTitle(){
         errorTotalAmount.innerHTML = "";
         totalAm.classList.add("is-valid");
         totalAm.classList.remove("is-invalid");
+        return true;
     } else {
         errorTotalAmount.innerHTML = "Total amount must be greater than 1000 and less than 50000.";
         totalAm.classList.add("is-invalid");
         totalAm.classList.remove("is-valid");
         return false;
     }
-    return true;
   }
 
-export {isValid,isValidTitle,validCategory,validMonth,validateTotalAmount};
+// validate expense category
+function validExpCategory(){
+    const errorExpCategory = document.getElementById("errorExpCategory");
+    const expenseCategory = document.getElementById("expenseCategory");
+
+    if (expenseCategory.value.trim()) {
+        errorExpCategory.innerHTML = "";
+        expenseCategory.classList.add("is-valid");
+        expenseCategory.classList.remove("is-invalid");
+      }
+    else {
+        errorExpCategory.innerHTML = "please select the category";
+        expenseCategory.classList.add("is-invalid");
+        expenseCategory.classList.remove("is-valid");
+        return false;
+    }
+    return true;
+   }
+
+// Validate title of Expense  
+function isValidTitle(){                                                                                       
+    const errorTitle = document.getElementById("errorTitle");
+    const ExpTitle = document.getElementById("ExpTitle");
+
+    const titleLength = ExpTitle.value.length;
+
+    if (titleLength >= 10 && titleLength<= 50) {
+        errorTitle.innerHTML = "";
+    } else {
+        errorTitle.innerHTML = "title must be greater than 10 and less than 50";
+        return false;
+    }
+    return true;
+}
+
+export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory};

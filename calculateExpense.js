@@ -1,20 +1,20 @@
 function calculateExpenses(category, month) {
+  // debugger
   let storageExpenseData = localStorage.getItem("ExpenseData");
-  storageExpenseData = JSON.parse(storageExpenseData);
-
-  if (storageExpenseData) {
-    let total = 0;
-    for (let i = 0; i < storageExpenseData.length; i++) {
-      let expense = storageExpenseData[i];
-      if (
-        expense.ExpenseCategory === category &&
-        expense.Expensemonth === month
-      ) {
-        total += Number(expense.ExpenseAmount);
-      }
-    }
-    return total;
+  if (!storageExpenseData) {
+    return 0;
   }
+  storageExpenseData = JSON.parse(storageExpenseData);
+  let total = storageExpenseData.reduce((acc,expense) => {
+    if (
+      expense.ExpenseCategory === category &&
+      expense.Expensemonth === month
+    ) {
+      return acc + Number(expense.ExpenseAmount);
+    }
+    return acc
+  },0);
+  return total;
 }
 
 export default calculateExpenses;

@@ -11,9 +11,9 @@
 
      <!--budget section  -->
     <div class="container mt-4 border">
-        <div class=" my-2 d-flex justify-content-between ">
-            <p>Budget</p>
-            <i class="bi bi-plus" data-bs-toggle="modal" data-bs-target="#addItemModal"></i>
+        <div class=" my-2 d-flex justify-content-between align-items-center">
+            <p class="text-center mb-0">Budget</p>
+            <i class="bi bi-plus" data-bs-toggle="modal" data-bs-target="#addItemModal" style="font-size: 25px;"></i>
         </div>
        
         <!-- table -->
@@ -35,12 +35,12 @@
 
     <!-- expense section  -->
     <div class="container mt-5 border">
-      <div class=" my-2 d-flex justify-content-between">
-          <p>Expense</p> 
+      <div class=" my-2 d-flex justify-content-between align-items-center">
+          <p class="mb-0">Expense</p> 
            <!-- search input -->
           <input type="text" id="searchInput" class="form-control mb-3 w-50" placeholder="Search">
           <!-- add item icon -->
-           <i class="bi bi-plus" data-bs-toggle="modal" data-bs-target="#addExpenseItemModal"></i>
+           <i class="bi bi-plus" data-bs-toggle="modal" data-bs-target="#addExpenseItemModal" style="font-size: 25px;"  ></i>
       </div>
       <!-- table -->
       <table class="table table-bordered text-center">
@@ -92,6 +92,7 @@
                         <input type="number" class="form-control" id="totalAmount" placeholder="Enter the amount">
                         <div id="errortotalAmount" class="text-danger"></div>
                       </div>
+                      <div id="errorBudget" class="text-danger mb-2"></div>
                       <div class="modal-footer">
                         <button id="saveFormChanges" type="submit" class="btn btn-primary">Submit</button>
                       </div>
@@ -123,6 +124,7 @@
                     <option value="Clothes">Clothes</option>
                     <option value="Others">Others</option>
                   </select>
+                  <div id="errorExpCategory" class="text-danger mb-2"></div>
                  </div>
                   <div class="mb-3 col-6">
                     <label for="ExpTitle" class="form-label"><b>Title<sup class="text-danger fs-5">*</sup></b></label>
