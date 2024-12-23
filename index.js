@@ -4,7 +4,7 @@ import {showTableData,showExpenseData} from "./showTable.js";
 import {prefilledData,prefilledDataExpense} from "./prefilledData.js";
 import {deleteItem,deleteItemExpense} from "./deleteItem.js";
 import searchData from "./searchItem.js";
-import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory } from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth } from "./validate.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const expenseCategory = document.getElementById("expenseCategory");
     expenseCategory.addEventListener("blur",validExpCategory);
+
+    const Expmonth = document.getElementById("Expmonth");
+    Expmonth.addEventListener("blur",validExpCategory);
 
 
   //on submit storage data tp localStorage

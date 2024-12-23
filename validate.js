@@ -114,4 +114,23 @@ function isValidTitle(){
     return true;
 }
 
-export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory};
+// validate expense month
+function validExpMonth(){
+    const errorExpMonth = document.getElementById("errorExpMonth");
+    const Expmonth = document.getElementById("Expmonth");
+
+    if (Expmonth.value.trim()) {
+        errorExpMonth.innerHTML = "";
+        Expmonth.classList.add("is-valid");
+        Expmonth.classList.remove("is-invalid");
+      }
+    else {
+        errorExpMonth.innerHTML = "please select the month";
+        Expmonth.classList.add("is-invalid");
+        Expmonth.classList.remove("is-valid");
+        return false;
+    }
+    return true;
+   }
+
+export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth};
