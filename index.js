@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = event.target
           .closest(".delete")
           .getAttribute("data-index");
-        deleteItem(index);
+        deleteItem(parseInt(index));
       }
     });
 

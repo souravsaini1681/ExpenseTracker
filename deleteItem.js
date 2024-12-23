@@ -6,7 +6,7 @@ function deleteItem(index) {
 
   const deleteData = document.getElementById("deletedata");
   deleteData.addEventListener("click", function () {
-    // debugger
+    debugger
     // check the expense in exist for these budget
     const tableData = localStorage.getItem("budgetData");
     const data = JSON.parse(tableData);
@@ -21,7 +21,7 @@ function deleteItem(index) {
           val.Expensemonth === dataElement.month
       )
     ) {
-      // debugger
+      debugger
       alert("this budegt expense already exist");
       return;
     }

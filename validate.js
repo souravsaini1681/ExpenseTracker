@@ -149,7 +149,7 @@ function validExpMonth(){
       expAmount.classList.remove("is-valid");
       return false;
   }
-  return true;
+  return true;  
    }
 
 export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth,validExpAmount};
