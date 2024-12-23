@@ -2,8 +2,8 @@ import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,
 import { showTableData, showExpenseData } from "./showTable.js";
 import calculateExpenses from "./calculateExpense.js";
 
-function addItem(event) {
-  event.preventDefault();
+function addItem() {
+  // event.preventDefault();  
 
   const { month, totalAmount } = registrationForm.elements;
   const category = document.getElementById("category");
@@ -43,16 +43,16 @@ function addItem(event) {
     storageData.push(data);
     localStorage.setItem("budgetData", JSON.stringify(storageData));
     registrationForm.reset();
-    const modal = document.getElementById("addItemModal");
-    if (modal) {
-      modal.style.display = "none";
+    // const modal = document.getElementById("addItemModal");
+    // if (modal) {
+    //   modal.style.display = "none";
 
-      const backdrop = document.querySelector(".modal-backdrop");
-      if (backdrop) {
-        backdrop.remove();
-      }
-      document.body.style.overflow = "auto";
-    }
+    //   const backdrop = document.querySelector(".modal-backdrop");
+    //   if (backdrop) {
+    //     backdrop.remove();
+    //   }
+    //   document.body.style.overflow = "auto";
+    // }
     showTableData(storageData);
   }
 }
@@ -60,7 +60,7 @@ function addItem(event) {
 function addExpenseItem(event) {
   event.preventDefault();
 
-  const { ExpTitle, Expmonth, Expamount } = ExpenseRegistrationForm.elements;
+  const { ExpTitle, Expmonth, expAmount } = ExpenseRegistrationForm.elements;
   const expenseCategory = document.getElementById("expenseCategory");
 
   let budgets = localStorage.getItem("budgetData");
@@ -75,7 +75,7 @@ function addExpenseItem(event) {
     !budget ||
     budget.totalAmount -
       calculateExpenses(expenseCategory.value, Expmonth.value) <
-      Expamount.value
+      expAmount.value
   ) {
     alert("The selected category and month do not have sufficient budget");
     return;
@@ -96,7 +96,7 @@ function addExpenseItem(event) {
       ExpenseCategory: expenseCategory.value,
       ExpenseTitle: ExpTitle.value,
       Expensemonth: Expmonth.value,
-      ExpenseAmount: parseInt(Expamount.value),
+      ExpenseAmount: parseInt(expAmount.value),
     };
 
     storageData.push(data);

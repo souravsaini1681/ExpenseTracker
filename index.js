@@ -33,10 +33,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const expAmount = document.getElementById("expAmount");
     expAmount.addEventListener("blur",validExpAmount);
 
+    // budget modal open 
+      const budgetModal = document.getElementById("budgetModal")
+      budgetModal.addEventListener("click",function(){
 
-  //on submit storage data tp localStorage
+        category.classList.remove("is-valid","is-invalid");
+        month.classList.remove("is-valid","is-invalid"); 
+        totalAmount.classList.remove("is-valid","is-invalid");
+        
+        const errortotalAmount = document.getElementById("errortotalAmount");
+        if(errortotalAmount.innerHTML){
+          errortotalAmount.style.display="none";
+        }else{
+          errortotalAmount.style.display="block";
+        }
+   // Show modal for add item
+         const modalElement = document.getElementById("addItemModal");
+         const modal = new bootstrap.Modal(modalElement);
+         modal.show();
+
+           //on submit storage data tp localStorage
   const registrationForm = document.getElementById("registrationForm");
-  registrationForm.addEventListener("submit", addItem);
+  registrationForm.addEventListener("submit",function(event){
+    event.preventDefault();
+    addItem();
+    modal.hide();
+  });
+})
+
+   
+
+
 
   const ExpenseRegistrationForm = document.getElementById(
     "ExpenseRegistrationForm"

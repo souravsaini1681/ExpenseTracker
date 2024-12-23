@@ -73,7 +73,7 @@ function prefilledDataExpense(mode) {
       ExpnseData.ExpenseCategory;
     document.getElementById("ExpTitle").value = ExpnseData.ExpenseTitle;
     document.getElementById("Expmonth").value = ExpnseData.Expensemonth;
-    document.getElementById("Expamount").value = ExpnseData.ExpenseAmount;
+    document.getElementById("expAmount").value = ExpnseData.ExpenseAmount;
 
     // Show modal for editing
     const modalElement = document.getElementById("addExpenseItemModal");
@@ -90,7 +90,7 @@ function prefilledDataExpense(mode) {
         ExpenseCategory: document.getElementById("expenseCategory").value,
         ExpenseTitle: document.getElementById("ExpTitle").value,
         Expensemonth: document.getElementById("Expmonth").value,
-        ExpenseAmount: document.getElementById("Expamount").value,
+        ExpenseAmount: document.getElementById("expAmount").value,
       };
       let budgets = localStorage.getItem("budgetData");
       budgets = JSON.parse(budgets);
@@ -104,7 +104,7 @@ function prefilledDataExpense(mode) {
         !budget ||
         budget.totalAmount -
           calculateExpenses(expenseCategory.value, Expmonth.value) <
-          Expamount.value
+          expAmount.value
       ) {
         alert("The selected category and month do not have sufficient budget");
         return;

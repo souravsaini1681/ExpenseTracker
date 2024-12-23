@@ -11,9 +11,9 @@ function searchData() {
       item.ExpenseCategory.toLowerCase().includes(searchInput) ||
       item.ExpenseTitle.toLowerCase().includes(searchInput) ||
       item.Expensemonth.toLowerCase().includes(searchInput) ||
-      item.ExpenseAmount.toLowerCase().includes(searchInput)
+      item.ExpenseAmount.includes(searchInput)
   );
   showExpenseData(filterData);
-}
+} 
 
 export default searchData;

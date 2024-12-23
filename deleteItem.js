@@ -15,10 +15,7 @@ function deleteItem(index) {
   deleteData.addEventListener(
     "click",
     function () {
-      // debugger
       // check the expense in exist for these budget
-      console.log("delete balance");
-
       if (
         expenseData.some(
           (val) =>
@@ -26,7 +23,6 @@ function deleteItem(index) {
             val.Expensemonth === dataElement.month
         )
       ) {
-        // debugger
         alert("this budegt expense already exist");
         return;
       }

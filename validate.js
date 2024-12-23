@@ -107,8 +107,12 @@ function isValidTitle() {
 
   if (titleLength >= 10 && titleLength <= 50) {
     errorTitle.innerHTML = "";
+    ExpTitle.classList.add("is-valid");
+    ExpTitle.classList.remove("is-invalid");
   } else {
     errorTitle.innerHTML = "title must be greater than 10 and less than 50";
+    ExpTitle.classList.add("is-invalid");
+    ExpTitle.classList.remove("is-valid");
     return false;
   }
   return true;
@@ -116,7 +120,7 @@ function isValidTitle() {
 
 // validate expense month
 function validExpMonth(){
-    const errorExpMonth = document.getElementById("  ");
+    const errorExpMonth = document.getElementById("errorExpMonth");
     const Expmonth = document.getElementById("Expmonth");
 
     if (Expmonth.value.trim()) {
@@ -137,8 +141,7 @@ function validExpMonth(){
    function validExpAmount(){
     const errorExpAmount = document.getElementById("errorExpAmount");
     const expAmount = document.getElementById("expAmount");  
-
-    if (expAmount.value >=1) {
+    if (parseInt(expAmount.value.trim()) >=1) {
       errorExpAmount.innerHTML = "";
       expAmount.classList.add("is-valid");
       expAmount.classList.remove("is-invalid");
