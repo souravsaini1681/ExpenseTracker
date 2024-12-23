@@ -1,10 +1,4 @@
-import {
-  isValidTitle,
-  validCategory,
-  validMonth,
-  validateTotalAmount,
-  isBudgetExist,
-} from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth,validExpAmount } from "./validate.js";
 import { showTableData, showExpenseData } from "./showTable.js";
 import calculateExpenses from "./calculateExpense.js";
 
@@ -116,7 +110,7 @@ function prefilledDataExpense(mode) {
         return;
       }
 
-      if (!isValidTitle()) {
+      if (!isValidTitle() || !validExpCategory() || !validExpMonth() || !validExpAmount() ) {
         return;
       } else {
         // Update the localStorage

@@ -4,14 +4,11 @@ import { showTableData, showExpenseData } from "./showTable.js";
 import { prefilledData, prefilledDataExpense } from "./prefilledData.js";
 import { deleteItem, deleteItemExpense } from "./deleteItem.js";
 import searchData from "./searchItem.js";
-import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth } from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth,validExpAmount } from "./validate.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
   //blur event
-  const ExpTitle = document.getElementById("ExpTitle");
-  ExpTitle.addEventListener("blur", isValidTitle);
-
   const category = document.getElementById("category");
   category.addEventListener("blur", validCategory);
 
@@ -27,8 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const expenseCategory = document.getElementById("expenseCategory");
     expenseCategory.addEventListener("blur",validExpCategory);
 
+    const ExpTitle = document.getElementById("ExpTitle");
+    ExpTitle.addEventListener("blur", isValidTitle);
+
     const Expmonth = document.getElementById("Expmonth");
-    Expmonth.addEventListener("blur",validExpCategory);
+    Expmonth.addEventListener("blur",validExpMonth);
+
+    const expAmount = document.getElementById("expAmount");
+    expAmount.addEventListener("blur",validExpAmount);
 
 
   //on submit storage data tp localStorage

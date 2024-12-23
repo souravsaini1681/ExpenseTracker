@@ -196,7 +196,6 @@
                     id="expenseCategory"
                     class="form-select"
                     aria-label="Default select example"
-                    required
                   >
                     <option value="" disabled selected>
                       Select the category
@@ -229,8 +228,8 @@
                     type="month"
                     class="form-control"
                     id="Expmonth"
-                    required
                   />
+                  <div id="errorExpMonth" class="text-danger"></div>
                 </div>
                 <div class="mb-3 col-6">
                   <label for="Expamount" class="form-label"
@@ -239,12 +238,10 @@
                   <input
                     type="number"
                     class="form-control"
-                    id="Expamount"
+                    id="expAmount"
                     placeholder="Enter the amount"
-                    min="1"
-                    required
                   />
-                  <div id="errortotalAmount" class="text-danger"></div>
+                  <div id="errorExpAmount" class="text-danger"></div>
                 </div>
                 <div class="modal-footer">
                   <button

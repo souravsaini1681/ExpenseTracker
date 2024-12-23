@@ -116,7 +116,7 @@ function isValidTitle() {
 
 // validate expense month
 function validExpMonth(){
-    const errorExpMonth = document.getElementById("errorExpMonth");
+    const errorExpMonth = document.getElementById("  ");
     const Expmonth = document.getElementById("Expmonth");
 
     if (Expmonth.value.trim()) {
@@ -133,4 +133,23 @@ function validExpMonth(){
     return true;
    }
 
-export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth};
+   //validate expense amount 
+   function validExpAmount(){
+    const errorExpAmount = document.getElementById("errorExpAmount");
+    const expAmount = document.getElementById("expAmount");  
+
+    if (expAmount.value >=1) {
+      errorExpAmount.innerHTML = "";
+      expAmount.classList.add("is-valid");
+      expAmount.classList.remove("is-invalid");
+    }
+  else {
+      errorExpAmount.innerHTML = "minimum value greater than 1";
+      expAmount.classList.add("is-invalid");
+      expAmount.classList.remove("is-valid");
+      return false;
+  }
+  return true;
+   }
+
+export {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth,validExpAmount};

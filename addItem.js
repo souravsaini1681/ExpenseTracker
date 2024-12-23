@@ -1,10 +1,4 @@
-import {
-  isValidTitle,
-  validCategory,
-  validMonth,
-  validateTotalAmount,
-  isBudgetExist,
-} from "./validate.js";
+import {isValidTitle,validCategory,validMonth,validateTotalAmount,isBudgetExist,validExpCategory,validExpMonth,validExpAmount } from "./validate.js";
 import { showTableData, showExpenseData } from "./showTable.js";
 import calculateExpenses from "./calculateExpense.js";
 
@@ -87,8 +81,8 @@ function addExpenseItem(event) {
     return;
   }
 
-  if (!isValidTitle()) {
-    return;
+  if (!isValidTitle() || !validExpCategory() || !validExpMonth() || !validExpAmount() ) {
+    return; 
   } else {
     let storageData = localStorage.getItem("ExpenseData");
 
@@ -102,7 +96,7 @@ function addExpenseItem(event) {
       ExpenseCategory: expenseCategory.value,
       ExpenseTitle: ExpTitle.value,
       Expensemonth: Expmonth.value,
-      ExpenseAmount: Expamount.value,
+      ExpenseAmount: parseInt(Expamount.value),
     };
 
     storageData.push(data);
