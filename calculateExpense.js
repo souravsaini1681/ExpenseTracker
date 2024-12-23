@@ -5,15 +5,15 @@ function calculateExpenses(category, month) {
     return 0;
   }
   storageExpenseData = JSON.parse(storageExpenseData);
-  let total = storageExpenseData.reduce((acc,expense) => {
+  let total = storageExpenseData.reduce((acc, expense) => {
     if (
       expense.ExpenseCategory === category &&
       expense.Expensemonth === month
     ) {
       return acc + Number(expense.ExpenseAmount);
     }
-    return acc
-  },0);
+    return acc;
+  }, 0);
   return total;
 }
 

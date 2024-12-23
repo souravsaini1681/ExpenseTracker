@@ -4,11 +4,12 @@ function showTableData(tableData) {
   const tableContent = document.getElementById("tableContent");
   tableContent.innerHTML = "";
 
-  if(tableData){
+  if (tableData) {
     tableData.forEach((item, index) => {
       const row = document.createElement("tr");
-      
-      let availableAmount = item.totalAmount - calculateExpenses(item.category,item.month);
+
+      let availableAmount =
+        item.totalAmount - calculateExpenses(item.category, item.month);
       if (isNaN(availableAmount) || availableAmount === undefined) {
         availableAmount = item.totalAmount;
       }
@@ -31,7 +32,7 @@ function showTableData(tableData) {
 function showExpenseData(tableData) {
   const tableExpenseContent = document.getElementById("tableExpenseContent");
   tableExpenseContent.innerHTML = "";
-  if(tableData){
+  if (tableData) {
     tableData.forEach((item, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -43,12 +44,9 @@ function showExpenseData(tableData) {
             <i class="bi bi-pencil-fill editExpense" data-index="${index}"></i>
             <i class="bi bi-trash deleteExpense" data-index="${index}"></i>
            </td>`;
-           tableExpenseContent.appendChild(row);
+      tableExpenseContent.appendChild(row);
     });
   }
-  
 }
 
-export {showTableData,showExpenseData}
-
-
+export { showTableData, showExpenseData };
