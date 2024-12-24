@@ -40,13 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         category.classList.remove("is-valid","is-invalid");
         month.classList.remove("is-valid","is-invalid"); 
         totalAmount.classList.remove("is-valid","is-invalid");
-        
-        const errortotalAmount = document.getElementById("errortotalAmount");
-        if(errortotalAmount.innerHTML){
-          errortotalAmount.style.display="none";
-        }else{
-          errortotalAmount.style.display="block";
-        }
+
    // Show modal for add item
          const modalElement = document.getElementById("addItemModal");
          const modal = new bootstrap.Modal(modalElement);
@@ -61,14 +55,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })
 
-   
+// expense modal open 
+const expenseModal = document.getElementById("expenseModal");
+expenseModal.addEventListener("click",function(){
 
+  expenseCategory.classList.remove("is-valid","is-invalid");
+  ExpTitle.classList.remove("is-valid","is-invalid"); 
+  Expmonth.classList.remove("is-valid","is-invalid");
+  expAmount.classList.remove("is-valid","is-invalid");
 
+// Show modal for expense add item
+   const modalElement = document.getElementById("addExpenseItemModal");
+   const modal = new bootstrap.Modal(modalElement);
+   modal.show();
 
-  const ExpenseRegistrationForm = document.getElementById(
-    "ExpenseRegistrationForm"
-  );
-  ExpenseRegistrationForm.addEventListener("submit", addExpenseItem);
+     //on submit storage data tp localStorage
+const registrationForm = document.getElementById("ExpenseRegistrationForm");
+registrationForm.addEventListener("submit",function(event){
+event.preventDefault();
+addExpenseItem();
+modal.hide();
+});
+})
 
   //show table data
   let storageData = localStorage.getItem("budgetData");

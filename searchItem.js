@@ -14,6 +14,6 @@ function searchData() {
       item.ExpenseAmount.includes(searchInput)
   );
   showExpenseData(filterData);
-} 
+}   
 
 export default searchData;

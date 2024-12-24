@@ -57,8 +57,7 @@ function addItem() {
   }
 }
 
-function addExpenseItem(event) {
-  event.preventDefault();
+function addExpenseItem() {
 
   const { ExpTitle, Expmonth, expAmount } = ExpenseRegistrationForm.elements;
   const expenseCategory = document.getElementById("expenseCategory");
@@ -104,19 +103,17 @@ function addExpenseItem(event) {
     localStorage.setItem("ExpenseData", JSON.stringify(storageData));
     ExpenseRegistrationForm.reset();
 
-    const modal = document.getElementById("addExpenseItemModal");
+    // const modal = document.getElementById("addExpenseItemModal");
+    // if (modal) {
+    //   modal.style.display = "none";
 
-    if (modal) {
-      modal.style.display = "none";
+    //   const backdrop = document.querySelector(".modal-backdrop");
+    //   if (backdrop) {
+    //     backdrop.remove();
+    //   }
 
-      const backdrop = document.querySelector(".modal-backdrop");
-      if (backdrop) {
-        backdrop.remove();
-      }
-
-      document.body.style.overflow = "auto";
-    }
-
+    //   document.body.style.overflow = "auto";
+    // }
     showExpenseData(storageData);
 
     // update budget table data
